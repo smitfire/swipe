@@ -1,0 +1,15 @@
+<hr>
+<div class="row">
+    <div id="liked_books" class="centerwrap owl-carousel owl-theme">
+        <% @user.liked_books.each do |book| %>
+            <div class="item"><%= link_to image_tag(book.covrl, class: "lazyOwll"), book_path(book) %></div>
+        <% end -%>
+    </div>
+    <div class="customNavigation">
+      <a class="btn prev">Previous</a>
+      <a class="btn next">Next</a>
+      <a class="btn play">Autoplay</a>
+      <a class="btn stop">Stop</a>
+    </div>
+</div>
+<div class="clearfix"></div><hr>

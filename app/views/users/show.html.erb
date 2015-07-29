@@ -1,0 +1,71 @@
+
+<hr>
+<div class="row">
+  <div class="col-sm-6 text-left">  
+      <h3>Welcome <%=@user.name %></h3>
+  </div>
+   <div class="col-sm-5 text-right">
+     <h3><%=@user.email %> big dick king</h3>
+   </div> 
+</div>
+
+<div class="clearfix"></div><hr>
+
+<div class="row">
+    <div class="col-sm-3">
+        <%=image_tag(@user.avrl, class: "img-thumbnail meimg")%>
+    </div>
+    <div class="col-sm-8">
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>  
+                  <td># of Owned Books</td>
+                  <td># of Liked Books</td>
+                  <td># of Disliked Books</td>
+                  <td># of Books Liked by Others</td>
+                  <td># of Liked Users</td>
+                  <td># of Users Liked</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr> 
+                   <td><%=@user.owned_books.count %></td>
+                   <td><%=@user.liked_books.count %></td>
+                   <td><%=@user.disliked_books.count %></td>
+                   <td><%=@user.books_liked.count %></td>
+                   <td><%=@user.liked_users.count %></td>
+                   <td><%=@user.likers.count %></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+<div class="clearfix"></div><hr>
+
+<div class="row">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified" id="myTabs" role="tablist">
+    <li role="presentation" class="active"><a href="#all_available" aria-controls="all_available" role="tab" data-toggle="tab">Liked Books</a></li>
+    <li role="presentation"><a href="#passenger_rides" aria-controls="passenger_rides" role="tab" data-toggle="tab">Books Liked</a></li>
+    <li role="presentation"><a href="#driver_rides" aria-controls="driver_rides" role="tab" data-toggle="tab">Liked Users</a></li>
+    <!-- <li role="presentation"><a href="#driver_cal" aria-controls="driver_cal" role="tab" data-toggle="tab">Calendar</a></li> -->
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="all_available">
+        <%= render partial: "liked_books", locals: {user: @user} %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="passenger_rides">
+        <%= render partial: "books_liked", locals: {user: @user} %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="driver_rides">
+        <%= render partial: "liked_users", locals: {user: @user} %>
+    </div>
+    
+  </div>
+</div>

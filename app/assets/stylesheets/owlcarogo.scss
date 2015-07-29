@@ -1,0 +1,100 @@
+body{
+    .centerwrap{
+        display:table; margin:0 auto;
+    }
+    .customNavigation{
+      text-align: center;
+    }
+    //use styles below to disable ugly selection
+    .customNavigation a{
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .row{
+        img.meimg{
+            width:100%; height: auto;
+        }
+    }
+    #liked_books{
+        margin:0 auto;
+        .item{
+          // background: #3fbf79;
+          // padding: 30px 0px;
+          margin: 10px;
+          color: #FFF;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          text-align: center;
+        }
+    }
+
+
+    #owl-demo{ 
+        hr{
+            margin:18px 0;
+        }
+        .owl-controls{
+            float:left;
+            margin-left: 20px;
+            // margin-top: -90px;
+            .owl-buttons{
+                div{
+                    width:220px;
+                }
+            }
+        }
+        .item{
+            
+            .panelify{
+                // background: rgba(204,204,204,0.9) !important;
+                @gray-darker:  lighten(#000, 13.5%);
+             }
+
+            img{
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 0 auto;
+            }
+             
+        }
+
+        div.media{
+            img{
+                // width:100px !important; height:auto !important;
+            }
+            .media-body{
+                width:auto !important;
+            }
+        }
+        div.item{
+            div.col-sm-5{
+                a.mimg{
+                    > img{
+                        // width:100px !important; height:auto !important;            
+                    }
+                }
+                p.col-sm-2{
+                    word-break: break-word;
+                }
+                
+            }
+        }
+    }
+
+    #owl-mini-demo{
+        .item img{
+
+        }
+        .owl-controls{
+            
+        }
+    }
+
+}
+
