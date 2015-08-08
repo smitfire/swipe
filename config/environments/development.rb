@@ -42,14 +42,14 @@ Rails.application.configure do
   # config.action_mailer.default_url_options = { host: "localhost:7000" }
   
   
+  
+  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
   config.middleware.use(Rack::LiveReload,
     :min_delay        => 100,    # default 1000
     :max_delay        => 10_000, # default 60_000
     :live_reload_port => 56789,  # default 35729
-    :host             => 'swipe',
+    :host             => '127.0.0.1',
     :ignore           => [ %r{dont/modify\.html$} ]
   )
-  
-  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
   
 end

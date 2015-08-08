@@ -27,7 +27,7 @@ var compready = function(){
      
       });
     // var owl = $("#owl-demo");
-    var owl = $("#liked_books");
+    var owl = $(".smitify");
      
       // owl.owlCarousel({
          
@@ -60,17 +60,21 @@ var compready = function(){
      });
     
      // Custom Navigation Events
-     $(".next").click(function(){
+     $(".next").on("click", function(){
        owl.trigger('owl.next');
+       console.log("next");
      })
-     $(".prev").click(function(){
+     $(".prev").on("click", function(){
        owl.trigger('owl.prev');
+       console.log("prev");
      })
-     $(".play").click(function(){
+     $(".play").on("click",function(){
        owl.trigger('owl.play',1000); //owl.play event accept autoPlay speed as second parameter
+       console.log("play");
      })
-     $(".stop").click(function(){
+     $(".stop").on("click",function(){
        owl.trigger('owl.stop');
+       console.log("stop");
      })
 
 }

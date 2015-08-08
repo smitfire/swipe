@@ -1,4 +1,7 @@
 body{
+    .tab-content{
+        padding: 40px 0;
+    }
     .centerwrap{
         display:table; margin:0 auto;
     }
@@ -16,10 +19,10 @@ body{
     }
     .row{
         img.meimg{
-            width:100%; height: auto;
+            // width:100%; height: auto;
         }
     }
-    #liked_books{
+    #liked_books, div.smitify{
         margin:0 auto;
         .item{
           // background: #3fbf79;
@@ -55,7 +58,7 @@ body{
                 @gray-darker:  lighten(#000, 13.5%);
              }
 
-            img{
+            img.bookpic{
                 display: block;
                 width: 100%;
                 height: auto;

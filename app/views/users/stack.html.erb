@@ -3,14 +3,15 @@
     <div id="owl-demo" class="owl-carousel owl-theme">
         <% @user.bookstack.each do |book| %>
             <div class="item">
-                <div class="col-sm-6">
-                    <%= link_to image_tag(book.covrl), book_path(book) %>
+                <div class="col-sm-4 ">
+                    <%= link_to image_tag(book.image_url, class: "bookpic"), book_path(book) %>
                 </div>
-                <div class="col-sm-5 col-sm-offset-1 panelify">
+                <div class="col-sm-7 panelify">
                     <h4><%= link_to book.title, book_path(book) %></h4>
                     <hr>
                     <blockquote >
-                        <p><%= book.summary %></p>
+                        <!-- <p><%= book.description %></p> -->
+                        <p><%= ActionView::Base.full_sanitizer.sanitize(book.description) %></p>
                         <footer><cite title="Source Title"><%= book.author %></cite></footer>
                     </blockquote>
                     <div class="clearfix"></div><hr>
@@ -24,7 +25,9 @@
                         <h4 class="media-heading"><%= link_to book.owner.name.upcase, user_path(book.owner) %></h4>
                         <ul>
                             <li><%= book.owner.email %></li>
-                            <li></li>
+                            <li>
+                                
+                            </li>
                         </ul>
                       </div>
                     </div>

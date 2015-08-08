@@ -1,14 +1,29 @@
-<hr>
 <div class="row">
-    <div id="liked_books" class="centerwrap owl-carousel owl-theme">
-        <% @user.liked_books.each do |book| %>
-            <div class="item"><%= link_to image_tag(book.covrl, class: "lazyOwll"), book_path(book) %></div>
+    <div id="books_liked" class="center-block smitify owl-carousel owl-theme">
+        <% @user.books_liked.each do |book| %>
+            <div class="item"><%= link_to image_tag(book.image_url, class: "lazyOwll"), book_path(book) %></div>
         <% end -%>
     </div>
-    <div class="customNavigation">
-      <a class="btn prev">Previous</a>
-      <a class="btn next">Next</a>
-      <a class="btn play">Autoplay</a>
-      <a class="btn stop">Stop</a>
+</div>
+
+<div class="clearfix"></div><hr>
+
+<div class="row">
+  <!-- <div class="col-sm-8"> -->
+    <div class="btn-group centerwrap customNavigation" data-toggle="buttons">
+      <label class="btn btn-primary active prev">
+        <input  type="checkbox" autocomplete="off" checked> Previous
+      </label>
+      <label class="btn btn-primary next">
+        <input  type="checkbox" autocomplete="off"> Next
+      </label>
+      <label class="btn btn-primary play">
+        <input  type="checkbox" autocomplete="off"> Autoplay
+      </label>
+      <label class="btn btn-primary stop">
+        <input  type="checkbox" autocomplete="off"> Stop
+      </label>
     </div>
+  <!-- </div> -->
+
 </div>

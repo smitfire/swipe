@@ -4,13 +4,13 @@
         <% @user.matches.each do |book| %>
             <div class="item">
                 <div class="col-sm-7">
-                    <%= link_to image_tag(book.cover(:thumb)), book_path(book) %>
+                    <%= link_to image_tag(book.image_url), book_path(book) %>
                 </div>
                 <div class="col-sm-5">
                     <h4><%= link_to book.title, book_path(book) %></h4>
                     <hr>
                     <blockquote >
-                        <p><%= book.summary %></p>
+                        <p><%= book.description %></p>
                         <footer><cite title="Source Title"><%= book.author %> </cite></footer>
                     </blockquote>
                     <div class="clearfix"></div><hr>
@@ -18,7 +18,7 @@
                     <div class="clearfix"></div><hr>
                     <div id="owl-mini-demo">
                         <% book.owner.liked_books.where(owner: @user).each do |obk| %>
-                            <div class="item"><%= link_to image_tag(obk.cover(:thumb)), book_path(obk), class: "img-thumbnail" %></div>
+                            <div class="item"><%= link_to image_tag(obk.image_url), book_path(obk), class: "imgs-thumbnail" %></div>
                         <% end -%>
                     </div>
                 </div>

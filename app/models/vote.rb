@@ -10,7 +10,7 @@ class Vote < ActiveRecord::Base
   validates :user_id, :uniqueness => { :scope => :book_id }
   validates :book_id, :uniqueness => { :scope => :user_id }
   
-  validate :cant_vote_on_own_book, if: "user_id.present?"
+  # validate :cant_vote_on_own_book, if: "user_id.present?"
 
 
   # def match?

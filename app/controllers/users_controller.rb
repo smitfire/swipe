@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :stack, :matches, :edit, :update, :destroy, :like, :dislike]
+  before_action :set_user, only: [:show, :stack, :matches, :edit, :update, :destroy, :like, :dislike, :unlike]
 
   # GET /users
   def index
@@ -27,6 +27,12 @@ class UsersController < ApplicationController
       @book = Book.find(params[:book_id])
       @user.disliked_books<<@book
       redirect_to :back, notice: "Successfully disLiked Book"
+  end
+
+  def unlike
+      @book = Book.find(params[:book_id])
+      @user.liked_books.delete(@book)
+      redirect_to :back, notice: "Book has been unliked"
   end
 
   # GET /users/new

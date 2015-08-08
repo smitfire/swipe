@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage/
   # validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/, /jpg\Z/, /JPG\Z/]
   
+  has_many :conversations, :foreign_key => :sender_id
+  
   has_many :votes, -> { includes :book }, dependent: :destroy
   
   has_many :owned_books, ->{ uniq }, class_name: "Book", dependent: :destroy, inverse_of: :owner
@@ -33,24 +35,21 @@ class User < ActiveRecord::Base
   has_many :liked_users, -> { uniq }, through: :liked_books, source: :owner
 
   # GEOCODER
-  # geocoded_by :address_str   # can also be an IP address
-  # geocoded_by :full_address   # can also be an IP address
-  # after_validation :geocode, unless: "full_address.nil?"
-
-  # geocoded_by :ip_address
-  # after_validation :geocode, unless: "ip_address.nil?"
-  
   geocoded_by :ip_address,
-    :latitude => :latitude, :longitude => :longitude
-  after_validation :geocode, unless: "latitude != nil"
+      :latitude => :latitude, :longitude => :longitude
 
-  # reverse_geocoded_by :latitude, :longitude
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.state   = geo.state
+      obj.zipcode = geo.postal_code
+      obj.country = geo.country
+      obj.street  = geo.address
+    end
+  end
+
   # after_validation :geocode, :reverse_geocode
 
-
-  # after_validation :reverse_geocode, :if => :has_coordinates
-  # after_validation :geocode, :if => :has_location, :unless => :has_coordinates
-  
   # SCOPES
   scope :people_in_range, -> (user) { where("id != ? and ", user.id ).near( [ user.latitude, user.longitude ], user.range ) }
   scope :all_likers, -> { joins(:votes).where('votes.liked = ?', true) }
@@ -58,9 +57,18 @@ class User < ActiveRecord::Base
 
   # Validations
 
-  # def address_str
-  #     [street, city, state, country].compact.join(', ')
-  # end
+  def address
+     [street, city, state, country].compact.join(', ')
+  end
+
+  def address_changed?
+     [street.changed?, city.changed?, state.changed?, country.changed?].count(true) > 0
+  end
+  
+
+  def has_coordinates
+    longitude.present? and latitude.present?
+  end
 
   def matches
     liked_books.where(user_id: likers.ids)
@@ -76,6 +84,7 @@ class User < ActiveRecord::Base
     if geocoded?
       bkids = owned_books.ids+voted_books.ids
       usrids = nearbys(range).flat_map{|usr| usr.id}
+      # usrids = User.people_in_range(self).pluck(:id)
       Book.where("user_id in (?) AND id not in (?)", usrids, bkids)
     else
       puts "not geocoded"
@@ -89,3 +98,6 @@ class User < ActiveRecord::Base
     end
 
 end
+
+
+
